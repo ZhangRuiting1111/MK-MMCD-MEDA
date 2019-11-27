@@ -49,7 +49,9 @@ function [Acc,acc_iter,Beta,Yt_pred] = MK_MMCD(Xs,Ys,Xt,Yt,options)
     if ~isfield(options,'gamma')
         options.gamma = 0.4;
     end
-
+    if ~isfield(options,'delta')
+        options.delta = 0.01;
+    end
     % Manifold feature learning
     [Xs_new,Xt_new,~] = GFK_Map(Xs,Xt,options.d);
     Xs = double(Xs_new'); %行变列
