@@ -132,7 +132,7 @@ function [Acc,acc_iter,Beta,Yt_pred] = MK_MMCD(Xs,Ys,Xt,Yt,options)
             Z = Z + Zc;
         end
         M = (1 - mu) * M0 + mu * Mc;
-        V = M + options.gamma * (Z * X' * X * Z);
+        V = M + options.gamma * (Z * K' * K * Z);
         % norm function has bug, so we compute another way
         V = V / sqrt(sumsqr(V));
         
