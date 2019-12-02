@@ -54,6 +54,7 @@ function [Acc,acc_iter,Beta,Yt_pred] = MK_MMCD(Xs,Ys,Xt,Yt,options)
     end
     % Manifold feature learning
     [Xs_new,Xt_new,~] = GFK_Map(Xs,Xt,options.d);
+
     Xs = double(Xs_new'); %行变列
     Xt = double(Xt_new'); %行变列
 
@@ -132,7 +133,7 @@ function [Acc,acc_iter,Beta,Yt_pred] = MK_MMCD(Xs,Ys,Xt,Yt,options)
             Z = Z + Zc;
         end
         M = (1 - mu) * M0 + mu * Mc;
-        V = M + options.gamma * (Z * K' * K * Z);
+        V = M + options.gamma * (Z * X' * X * Z);
         % norm function has bug, so we compute another way
         V = V / sqrt(sumsqr(V));
         
@@ -140,7 +141,7 @@ function [Acc,acc_iter,Beta,Yt_pred] = MK_MMCD(Xs,Ys,Xt,Yt,options)
         Beta = ((E + options.lambda * V + options.rho * L ) * K + options.eta * speye(n + m,n + m)) \ (E * YY);
 
         % compute MMD distance 
-        MMD_distance = trace(Beta' * K * Mc * K * Beta);
+        MMD_distance = trace(Beta' * K * M * K * Beta);
         % compute MMCD distance
         MMCD_distance = norm(Beta' * K * Z * K * Beta, 'fro')^2;
         F = K * Beta;

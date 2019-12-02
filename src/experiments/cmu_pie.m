@@ -2,7 +2,7 @@
 str_domains = {'05', '07', '09', '27', '29'};
 list_acc = [];
 % gamma
-gamma_list = [0.01, 0.1, 0.15, 0.2, 0.4, 0.8, 0.85, 0.9, 1, 10, 100];
+gamma_list = [0.6];
 
 options.d = 20;
 options.rho = 1.0;
